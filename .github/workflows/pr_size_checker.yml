@@ -11,4 +11,5 @@ jobs:
           fetch-depth: 0
       - uses: maidsafe/pr_size_checker@v2
         with:
+          default_branch: master
           max_lines_changed: 400
