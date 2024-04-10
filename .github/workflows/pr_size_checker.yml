@@ -1,8 +1,8 @@
 name: PR Size Checker
 on:
   pull_request:
-  branches:
-    - develop
+    branches:
+      - develop
 
 jobs:
   linter_name:
