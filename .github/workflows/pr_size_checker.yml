@@ -1,15 +1,16 @@
 name: PR Size Checker
-on: pull_request
+on:
+  pull_request:
+  branches:
+    - develop
+
 jobs:
-  check_pr_size:
-    name: Check PR size doesn't break set limit(400 lines)
+  linter_name:
+    name: runner / check-pr-size
     runs-on: ubuntu-latest
     steps:
-      # checkout your code with your git history
-      - uses: actions/checkout@v2
+      - uses: budougumi0617/action-pr-size-checker@5ef71f72c7709906031d5d9031d69f6fa13b92a8
         with:
-          fetch-depth: 0
-      - uses: maidsafe/pr_size_checker@v2
-        with:
-          default_branch: master
-          max_lines_changed: 400
+          github_token: ${{ secrets.github_token }}
+          max_added_count: 400
+          filter_pattern: '.*\.lock|.*\.json|.*\.txt|.*\.sql|.*\.css|.*\.css|.*\.yml|.*\.yaml|.*\.md|'
