@@ -1,16 +1,20 @@
 name: PR Size Checker
 on:
   pull_request:
-    branches:
-      - develop
+    # featureブランチへのマージも対象にしたいため、ブラックリスト制にする
+    branches-ignore:
+      - main
 
 jobs:
   linter_name:
     name: runner / check-pr-size
     runs-on: ubuntu-latest
     steps:
-      - uses: budougumi0617/action-pr-size-checker@5ef71f72c7709906031d5d9031d69f6fa13b92a8
+      # PR Sizeをチェックする
+      # 20240924 v0.0.8にアップデート
+      - uses: budougumi0617/action-pr-size-checker@9422aa8c05ae9bea1368d283fb1615028539be36
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           max_added_count: 400
-          filter_pattern: '.*\.lock|.*\.json|.*\.txt|.*\.sql|.*\.css|.*\.yml|.*\.yaml|.*\.md'
+          # 汎用的フィルターを適用。
+          filter_pattern: '.*\.lock|.*\.json|.*\.txt|.*\.yml|.*\.yaml|.*\.md'
